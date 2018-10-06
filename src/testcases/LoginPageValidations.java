@@ -2,10 +2,12 @@ package testcases;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.SignedObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -13,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import pageClasses.LandingPage;
 import pageClasses.searchPageMercury;
 
 public class LoginPageValidations {
@@ -20,11 +23,13 @@ public class LoginPageValidations {
 	private WebDriver driver;
 	private String baseUrl = "http://newtours.demoaut.com/mercurywelcome.php";
 	searchPageMercury sp;
+	LandingPage lp;
 
 	@Before
 	public void setUp() throws Exception {
 		driver = new ChromeDriver();
 		sp = new searchPageMercury(driver);
+		lp = new LandingPage(driver);
 		driver.get(baseUrl);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -81,4 +86,23 @@ public class LoginPageValidations {
 		}
 	}
 
+	@Test
+	public void validateSuccessfulSignIn() {
+		sp.fillUserName("mercury");
+		sp.fillPassword("mercury");
+		sp.clickSignInButton();
+		boolean navigatedToLandingPage = lp.SignOffLinkPresent(driver);
+		if (navigatedToLandingPage) {
+			System.out.println("Navigation to landing page successful");
+		} else {
+			System.out.println("navigation to landing page failed");
+		}
+
+	}
+
+	@After
+	public void afterMethod() {
+		// driver.close();
+		// driver.quit();
+	}
 }
