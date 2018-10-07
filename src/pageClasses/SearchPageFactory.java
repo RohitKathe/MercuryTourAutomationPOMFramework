@@ -1,5 +1,7 @@
 package pageClasses;
 
+import javax.lang.model.element.Element;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +20,7 @@ public class SearchPageFactory {
 	@FindBy(id = "flight-type-multi-dest-label-hp-flight")
 	WebElement multiCity;
 
+	
 	public void ClickFlightsTab() {
 		flightsTab.click();
 	}

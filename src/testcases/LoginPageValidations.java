@@ -14,6 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pageClasses.LandingPage;
 import pageClasses.searchPageMercury;
@@ -91,6 +92,7 @@ public class LoginPageValidations {
 		sp.fillUserName("mercury");
 		sp.fillPassword("mercury");
 		sp.clickSignInButton();
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 		boolean navigatedToLandingPage = lp.SignOffLinkPresent(driver);
 		if (navigatedToLandingPage) {
 			System.out.println("Navigation to landing page successful");
@@ -102,6 +104,7 @@ public class LoginPageValidations {
 
 	@After
 	public void afterMethod() {
+
 		// driver.close();
 		// driver.quit();
 	}
